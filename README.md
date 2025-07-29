@@ -58,7 +58,8 @@ A cada segundo, o sistema:
    * 🟢 Verde: média (<4500 lux)
 
    * 🔴 Vermelho: alta (>5000 lux)
-     
+
+Com isso, enquando o sensor de luminosidade detecatar lux de 0 a 2500 o led azul será ativado e o servo motor irá girar, entre 3000 e 4500  o led verde será ativado e o servo irá para de rodar, acima ou igual a 5000 lux o servo rodará em sentido contrário.
 3. Controle do servo motor
 - O ângulo do servo é ajustado de acordo com a luminosidade
 
