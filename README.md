@@ -4,6 +4,16 @@
 ![Sensor](https://img.shields.io/badge/Sensor-BH1750-yellow.svg)
 ![Sensor](https://img.shields.io/badge/Servo-Motor-green.svg)
 
+## 🧠 Sobre o Projeto
+Este código foi desenvolvido para um sistema de monitoramento de luminosidade com o Raspberry Pi Pico, utilizando os seguintes componentes:
+
+Sensor BH1750 para medir luminosidade via I2C
+
+Display OLED SSD1306 para exibir informações
+
+LEDs RGB para indicar níveis de luz
+
+Servo motor para atuar conforme a intensidade luminosa
 
 ## 🛠️ Estrutura do projeto
 - luminus.c – Programa principal em C que faz leitura luminosidade do local, com base nesta informação utiliza o servo motor girar no especificado no código e essa informação é exibida no porta serial e no visor oled da BitDogLab
@@ -27,4 +37,33 @@ Hardware:
  - Clique no botão run no Vscode ou arraste o arquivo .u2 para dentro do disco removível que aparecer
  - O Pico irá reiniciar executando o firmware
 
-3- Testar a aplicação
+## 🔧 Funcionamento do Código
+O programa realiza as seguintes ações:
+
+1. Inicialização dos periféricos
+- Configura o barramento I2C0 (pinos GPIO 0 e 1)
+- Inicializa o sensor BH1750 e o display OLED SSD1306
+- Configura os pinos dos LEDs RGB
+- Inicializa o sinal PWM para controle do servo motor
+  
+2. Leitura da luminosidade
+A cada segundo, o sistema:
+
+- Lê a intensidade de luz (em lux) com o sensor BH1750
+- Exibe o valor no display OLED
+- Acende um LED correspondente ao nível de luminosidade:
+
+   * 🔵 Azul: baixa (<2500 lux)
+
+   * 🟢 Verde: média (<4500 lux)
+
+   * 🔴 Vermelho: alta (>5000 lux)
+     
+3. Controle do servo motor
+- O ângulo do servo é ajustado de acordo com a luminosidade
+
+## 📦 Dependências
+
+bh1750.h para o sensor de luz
+
+ssd1306.h e ssd1306_fonts.h para o display OLED
