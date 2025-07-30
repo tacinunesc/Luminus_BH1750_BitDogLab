@@ -1,10 +1,10 @@
-# Sensor de Luminosidade BH1750 + Servo Motor atuando com Pico W (BitDogLab)
+# 🌞 Sensor de Luminosidade BH1750 + Servo Motor atuando com Pico W (BitDogLab)
 ![Linguagem](https://img.shields.io/badge/Linguagem-C-blue.svg)
 ![Plataforma](https://img.shields.io/badge/Plataforma-Raspberry%20Pi%20Pico-purple.svg)
 ![Sensor](https://img.shields.io/badge/Sensor-BH1750-yellow.svg)
 ![Sensor](https://img.shields.io/badge/Servo-Motor-green.svg)
 
-## 🧠 Sobre o Projeto
+## Sobre o Projeto
 Este código foi desenvolvido para um sistema de monitoramento de luminosidade com o Raspberry Pi Pico, utilizando os seguintes componentes:
 
 Sensor BH1750 para medir luminosidade via I2C
