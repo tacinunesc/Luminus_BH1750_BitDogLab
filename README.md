@@ -7,6 +7,11 @@
 ## Sobre o Projeto
 Este código foi desenvolvido para um sistema de monitoramento de luminosidade com o Raspberry Pi Pico, utilizando os seguintes componentes:
 
+<div align="center">
+  <img src="img/luminus.jpg "  alt="Controle" width="30%">
+
+</div>
+
 Sensor BH1750 para medir luminosidade via I2C
 
 Display OLED SSD1306 para exibir informações
