@@ -41,6 +41,7 @@ add_executable(PCIO
     inc/ssd1306.c
     inc/ssd1306_fonts.c
     inc/ssd1306_bitmaps.c
+    servo.c
 )
 
 pico_set_program_name(PCIO "PCIO")
