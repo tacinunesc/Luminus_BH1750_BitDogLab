@@ -6,12 +6,10 @@
 #include "inc/ssd1306_fonts.h"
 #include "servo.h"
 
-// --- Definições das portas utilizadas pelo BH1750 no i2c0 ---
 #define I2C_PORT i2c0
 #define I2C_SDA 0
 #define I2C_SCL 1
 
-// --- Definições das portas GPIOs utilizadas pelos LEDs ---
 #define LED_AZUL 12
 #define LED_VERDE 11
 #define LED_VERMELHO 13
@@ -43,7 +41,6 @@ int main() {
     while (!stdio_usb_connected()) sleep_ms(100);
     printf("Sistema iniciado.\n");
 
-    // Inicialização do I2C e sensor BH1750
     i2c_init(I2C_PORT, 100000);
     gpio_set_function(I2C_SDA, GPIO_FUNC_I2C);
     gpio_set_function(I2C_SCL, GPIO_FUNC_I2C);
@@ -51,7 +48,7 @@ int main() {
     gpio_pull_up(I2C_SCL);
     bh1750_init(I2C_PORT);
 
-    // Inicialização do Display
+
     ssd1306_Init();
     ssd1306_Fill(Black);
     ssd1306_UpdateScreen();
@@ -63,13 +60,15 @@ int main() {
     while (1) {
         float lum_f = bh1750_read_lux(I2C_PORT);
         float angulo = -1;
-        char buffer[32];
+        char linha1[32], linha2[32], linha3[32];
+printf("Display: Servo: %.0f graus\n", angulo);
 
         if (lum_f >= 0) {
             uint16_t lum = (uint16_t)lum_f;
             printf("Luminosidade: %u lum\n", lum);
             controlar_leds(lum);
             angulo = mover_servo_por_lum(lum);
+            printf("Ângulo calculado: %.0f graus\n", angulo);
         } else {
             printf("Erro ao ler luminosidade\n");
             desligar_leds();
@@ -77,21 +76,18 @@ int main() {
 
         ssd1306_Fill(Black);
         ssd1306_SetCursor(0, 0);
-        ssd1306_WriteString("MONITOR L-S", Font_7x10, White);
+        snprintf(linha1, sizeof(linha1), "MONITOR L-S");
+        ssd1306_WriteString(linha1, Font_7x10, White);
 
-        snprintf(buffer, sizeof(buffer), "Lum: %.1f lum", lum_f);
         ssd1306_SetCursor(0, 12);
-        ssd1306_WriteString(buffer, Font_7x10, White);
-
-        if (angulo >= 0)
-            snprintf(buffer, sizeof(buffer), "Servo: %.0f graus", angulo);
-        else
-            snprintf(buffer, sizeof(buffer), "Servo: sem ajuste");
+        snprintf(linha2, sizeof(linha2), "Lum: %.1f lum", lum_f);
+        ssd1306_WriteString(linha2, Font_7x10, White);
 
         ssd1306_SetCursor(0, 24);
-        ssd1306_WriteString(buffer, Font_7x10, White);
-
+        snprintf(linha3, sizeof(linha3), "Servo: %.0f graus", angulo);
+        ssd1306_WriteString(linha3, Font_7x10, White);
         ssd1306_UpdateScreen();
+
         sleep_ms(1000);
     }
 

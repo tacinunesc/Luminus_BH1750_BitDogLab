@@ -2,6 +2,15 @@
 #include "pico/stdlib.h"
 #include "hardware/pwm.h"
 #include "servo.h"
+#include <math.h>
+
+
+void mover_servo(float angulo) {
+    // Conversão de ângulo para pulso PWM
+    float pulso = 0.5f + (angulo / 180.0f) * 2.0f;
+    uint16_t nivel_pwm = (uint16_t)((pulso / 20.0f) * 20000.0f);
+    pwm_set_gpio_level(SERVO_PIN, nivel_pwm);
+} 
 
 static float angulo_anterior = -1;
 
@@ -22,7 +31,7 @@ void inicializar_pwm_servo() {
 
 float mover_servo_por_lum(uint16_t lum) {
     float pulso_ms = 1.5f;
-    float angulo = 0.0f;
+    float angulo;
 
     // Categoriza a faixa de luminosidade
     int faixa;
@@ -76,5 +85,5 @@ float mover_servo_por_lum(uint16_t lum) {
     uint16_t nivel_pwm = (uint16_t)((pulso_ms / 20.0f) * 20000.0f);
     pwm_set_gpio_level(SERVO_PIN, nivel_pwm);
 
-    return pulso_ms;
+    return angulo;
 }
