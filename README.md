@@ -23,6 +23,7 @@ Servo motor para atuar conforme a intensidade luminosa
 ## 🛠️ Estrutura do projeto
 - luminus.c – Programa principal em C que faz leitura luminosidade do local, com base nesta informação utiliza o servo motor girar no especificado no código e essa informação é exibida no porta serial e no visor oled da BitDogLab
 - bh1750.c - Onde fica as definições do sensor de luminosidade
+- servo.c - Onde ficas as definições do atuador servo motor
 - Pasta inc - Onde esta localizada as informações da oled
 - CMakeLists.txt – Configuração do build usando o Pico SDK
 
@@ -71,5 +72,5 @@ A cada segundo, o sistema:
 ## 📦 Dependências
 
 bh1750.h para o sensor de luz
-
+sensor.h para o atuador servor motor
 ssd1306.h e ssd1306_fonts.h para o display OLED
